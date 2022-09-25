@@ -1,5 +1,62 @@
 module WordLists
 
-# Write your package code here.
+export words
+
+function words(languages::AbstractString...; all=false)
+    lists = Vector{String}[]
+    content = joinpath(dirname(@__DIR__), "lists")
+    for language in languages
+        lower_language = lowercase(language)
+        lower_language ∈ keys(LOOKUP_TABLE) || throw(ArgumentError("Unknown language code: $language"))
+        lang = LOOKUP_TABLE[lower_language]
+        push!(lists, readlines(joinpath(content, lang, "words.txt")))
+        extra_file = joinpath(content, lang, "extra.txt")
+        all && isfile(extra_file) && push!(lists, readlines(extra_file))
+    end
+    combine_sorted!(lists)
+end
+
+const LOOKUP_TABLE = Dict(
+    "english" => "en",
+    "eng" => "en",
+    "en" => "en",
+    "spanish" => "es",
+    "español" => "es",
+    "spa" => "es",
+    "es" => "es",
+)
+
+function combine_sorted!(lists::AbstractVector{<:AbstractVector})
+    while length(lists) > 1
+        sort!(lists; by=length, rev=true)
+        b = pop!(lists)
+        merge!(last(lists), b)
+    end
+    unique!(only(lists))
+end
+
+function merge!(a::AbstractVector, b::AbstractVector)
+    i, j = lastindex(a), lastindex(b)
+    resize!(a, length(a) + length(b))
+    k = lastindex(a)
+    while i >= firstindex(a) && j >= firstindex(b)
+        if a[i] > b[j]
+            a[k] = a[i]
+            i -= 1
+        else
+            a[k] = b[j]
+            j -= 1
+        end
+        k -= 1
+    end
+
+    while i < k
+        a[k] = b[j]
+        k -= 1
+        j -= 1
+    end
+
+    a
+end
 
 end
