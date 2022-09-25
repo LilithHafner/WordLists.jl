@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Home · WordLists.jl</title><script data-outdated-warner src="assets/warner.js"></script><link rel="canonical" href="https://LilithHafner.github.io/WordLists.jl/"/><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.045/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.24/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href>WordLists.jl</a></span></div><form class="docs-search" action="search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li class="is-active"><a class="tocitem" href>Home</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Home</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Home</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/LilithHafner/WordLists.jl/blob/main/docs/src/index.md#" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="WordLists"><a class="docs-heading-anchor" href="#WordLists">WordLists</a><a id="WordLists-1"></a><a class="docs-heading-anchor-permalink" href="#WordLists" title="Permalink"></a></h1><p>Documentation for <a href="https://github.com/LilithHafner/WordLists.jl">WordLists</a>.</p><ul><li><a href="#WordLists.WordLists"><code>WordLists.WordLists</code></a></li><li><a href="#WordLists.words-Tuple{Vararg{AbstractString}}"><code>WordLists.words</code></a></li></ul><article class="docstring"><header><a class="docstring-binding" id="WordLists.WordLists" href="#WordLists.WordLists"><code>WordLists.WordLists</code></a> — <span class="docstring-category">Module</span></header><section><div><p>A module containing the function <code>words</code>.</p><pre><code class="language-julia-repl hljs">julia&gt; words(&quot;english&quot;)
+257874-element Vector{String}:
+ &quot;Aani&quot;
+ &quot;Aaron&quot;
+ &quot;Aaronic&quot;
+ ⋮
+ &quot;zymurgy&quot;
+ &quot;zythem&quot;
+ &quot;zythum&quot;</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/LilithHafner/WordLists.jl/blob/1f9cd4069b92e1a460078e1f4ebf4c493b713366/src/WordLists.jl#L1-L15">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="WordLists.words-Tuple{Vararg{AbstractString}}" href="#WordLists.words-Tuple{Vararg{AbstractString}}"><code>WordLists.words</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia hljs">words(languages...; all)</code></pre><p>List the words in a language as a sorted <code>Vector{String}</code>.</p><p>The lists are incomplete and their exact contents are subject to change. Setting <code>all=true</code> will make an effort to include all words, but at the cost of including some non-words.</p><p>Languages can be queried by iso code, name, or english name and are not case sensitive.</p><p>The following languages are currently supported:</p><ul><li>English: &quot;english&quot;, &quot;eng&quot;, &quot;en&quot;</li><li>Spanish: &quot;spanish&quot;, &quot;español&quot;, &quot;spa&quot;, &quot;es&quot;</li></ul><p>Multilingual lists are supported. For example, <code>words(&quot;english&quot;, &quot;spanish&quot;)</code> will return a sorted list containing words from both English and Spanish.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; words(&quot;english&quot;)
+257874-element Vector{String}:
+ &quot;Aani&quot;
+ &quot;Aaron&quot;
+ &quot;Aaronic&quot;
+ ⋮
+ &quot;zymurgy&quot;
+ &quot;zythem&quot;
+ &quot;zythum&quot;
+
+julia&gt; words(&quot;es&quot;, &quot;en&quot;)
+257874-element Vector{String}:
+ &quot;Aani&quot;
+ &quot;Aaron&quot;
+ &quot;Aaronic&quot;
+ ⋮
+ &quot;útero&quot;
+ &quot;útil&quot;
+ &quot;útiles&quot;
+
+julia&gt; rand(words(&quot;EnGLiSH&quot;, &quot;EspañoL&quot;; all=true), 6)
+6-element Vector{String}:
+ &quot;Upham&quot;
+ &quot;asentir&quot;
+ &quot;butcher&quot;
+ &quot;fireworm&quot;
+ &quot;cirrolite&quot;
+ &quot;revocable&quot;</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/LilithHafner/WordLists.jl/blob/1f9cd4069b92e1a460078e1f4ebf4c493b713366/src/WordLists.jl#L20-L70">source</a></section></article></article><nav class="docs-footer"><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.23 on <span class="colophon-date" title="Sunday 25 September 2022 02:02">Sunday 25 September 2022</span>. Using Julia version 1.8.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
