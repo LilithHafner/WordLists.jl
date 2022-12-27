@@ -31,11 +31,12 @@ end
     @test words("portuguese") == words("portuguese"; all=true)
 end
 
-@testset "issorted & !isspace" begin
+@testset "Formatting" begin
     for lang in ["english", "spanish", "portuguese"], all in [false, true]
         list = words(lang; all)
         @test issorted(list)
         @test !any(word -> any(isspace, word), list) # No word contains whitespace
+        @test allunique(list)
     end
 end
 
