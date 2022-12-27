@@ -31,6 +31,12 @@ end
     @test words("portuguese") == words("portuguese"; all=true)
 end
 
+@testset "issorted" begin
+    for lang in ["english", "spanish"], all in [false, true]
+        @test issorted(words(lang; all))
+    end
+end
+
 @testset "English Content" begin
     en = words("en")
     aen = words("en"; all=true)
@@ -41,16 +47,12 @@ end
     @test "supercalifragilisticexpialidocious" ∉ en
     @test "ljkaflkj" ∉ en
 
-    @test issorted(en)
-
     @testset "All" begin
         @test "hello" ∈ aen
         @test "cookie" ∈ aen
         @test "cookiemonster" ∈ aen
         @test "supercalifragilisticexpialidocious" ∈ aen
         @test "ljkaflkj" ∉ aen
-
-        @test issorted(aen)
     end
 
     @testset "length" begin
