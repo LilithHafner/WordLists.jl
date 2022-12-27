@@ -32,7 +32,7 @@ end
 end
 
 @testset "issorted & !isspace" begin
-    for lang in ["english", "spanish"], all in [false, true]
+    for lang in ["english", "spanish", "portuguese"], all in [false, true]
         list = words(lang; all)
         @test issorted(list)
         @test !any(word -> any(isspace, word), list) # No word contains whitespace
