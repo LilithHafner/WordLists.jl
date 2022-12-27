@@ -28,9 +28,11 @@ end
     @test words("spanish") == words("spanish"; all=true) # handle missing extra.txt
 end
 
-@testset "issorted" begin
+@testset "issorted & !isspace" begin
     for lang in ["english", "spanish"], all in [false, true]
-        @test issorted(words(lang; all))
+        list = words(lang; all)
+        @test issorted(list)
+        @test !any(word -> any(isspace, word), list) # No word contains whitespace
     end
 end
 
