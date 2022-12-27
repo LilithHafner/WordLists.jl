@@ -11,11 +11,13 @@ end
 
 @testset "Non-english languages" begin
     @test words("spanish") isa Vector{String}
+    @test words("portuguese") isa Vector{String}
 end
 
 @testset "Aliases" begin
     @test words("english") == words("en") == words("eng")
     @test words("spanish") == words("es") == words("spa") == words("español")
+    @test words("portuguese") == words("pt") == words("por") == words("português")
 end
 
 @testset "Duplicate removal" begin
@@ -26,10 +28,11 @@ end
     @test words("english") ⊆ words("english"; all=true)
     @test length(words("english")) < length(words("english"; all=true))
     @test words("spanish") == words("spanish"; all=true) # handle missing extra.txt
+    @test words("portuguese") == words("portuguese"; all=true)
 end
 
 @testset "issorted & !isspace" begin
-    for lang in ["english", "spanish"], all in [false, true]
+    for lang in ["english", "spanish", "portuguese"], all in [false, true]
         list = words(lang; all)
         @test issorted(list)
         @test !any(word -> any(isspace, word), list) # No word contains whitespace
@@ -73,4 +76,20 @@ end
     @test "orange" ∉ es
     @test "pear" ∉ es
     @test "lkfjakljf" ∉ es
+end
+
+@testset "Portuguese Content" begin
+    pt = words("pt")
+
+    @test "a" ∈ pt
+    @test "ser" ∈ pt
+    @test "estar" ∈ pt
+    @test "bola" ∈ pt
+    @test "bem" ∈ pt
+    @test "levantar" ∈ pt
+    @test "levantate" ∉ pt
+    @test "hi" ∉ pt
+    @test "orange" ∉ pt
+    @test "pear" ∉ pt
+    @test "lkfjakljf" ∉ pt
 end
