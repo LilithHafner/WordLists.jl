@@ -65,18 +65,15 @@ end
 
 @testset "Spanish Content" begin
     es = words("es")
-
-    @test "a" ∈ es
-    @test "ser" ∈ es
-    @test "estar" ∈ es
-    @test "hola" ∈ es
-    @test "bienvenidos" ∈ es
-    @test "levántate" ∈ es
-    @test "levantate" ∉ es
-    @test "hi" ∉ es
-    @test "orange" ∉ es
-    @test "pear" ∉ es
-    @test "lkfjakljf" ∉ es
+    for word in ["a", "ser", "estar", "hola", "bienvenidos", "levántate", "pelota",
+        "cabezas", "idioma", "español"]
+        @test word ∈ es
+    end
+    for word in ["levantate", "hi", "orange", "pear", "lkfjakljf", "the", "of",
+        "and", "to", "it", "with", "for", "on", "his", "that", "this", "have", "from",
+        "by", "was", "were", "são", "estão"]
+        @test word ∉ es
+    end
 end
 
 @testset "Portuguese Content" begin
