@@ -69,6 +69,7 @@ julia> rand(words("EnGLiSH", "EspañoL"; all=true), 6)
 ```
 """
 function words(languages::AbstractString...; all=false)
+    isempty(languages) && throw(ArgumentError("No languages specified. Try `words(\"español\")`."))
     lists = Vector{String}[]
     content = joinpath(dirname(@__DIR__), "lists")
     for language in languages
