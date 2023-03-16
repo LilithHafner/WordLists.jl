@@ -47,7 +47,7 @@ end
             @test issorted(list)
             @test !any(word -> any(isspace, word), list) # No word contains whitespace
             @test allunique(list)
-        endNo languages specified. Try `words("español")`.
+        end
     end
 
     @testset "English Content" begin
