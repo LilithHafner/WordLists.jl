@@ -31,6 +31,8 @@ The following languages are currently supported:
 
 - English: "english", "eng", "en"
 - Spanish: "spanish", "español", "spa", "es"
+- Portuguese: "portuguese", "português", "por", "pt"
+- French: "french", "français", "fre", "fr"
 
 Multilingual lists are supported. For example, `words("english", "spanish")` will return a
 sorted list containing words from both English and Spanish.
@@ -94,7 +96,11 @@ const LOOKUP_TABLE = Dict(
     "portuguese" => "pt",
     "português" => "pt",
     "por" => "pt",
-    "pt" => "pt"
+    "pt" => "pt",
+	"french" => "fr",
+	"français" => "fr",
+	"fre" => "fr",
+	"fr" => "fr"
 )
 
 function combine_sorted!(lists::AbstractVector{<:AbstractVector})
