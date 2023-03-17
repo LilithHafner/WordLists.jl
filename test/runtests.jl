@@ -12,12 +12,14 @@ end
 @testset "Non-english languages" begin
     @test words("spanish") isa Vector{String}
     @test words("portuguese") isa Vector{String}
+    @test words("french") isa Vector{String}
 end
 
 @testset "Aliases" begin
     @test words("english") == words("en") == words("eng")
     @test words("spanish") == words("es") == words("spa") == words("español")
     @test words("portuguese") == words("pt") == words("por") == words("português")
+    @test words("french") == words("fr") == words("fre") == words("français")
 end
 
 @testset "Duplicate removal" begin
@@ -29,10 +31,11 @@ end
     @test length(words("english")) < length(words("english"; all=true))
     @test words("spanish") == words("spanish"; all=true) # handle missing extra.txt
     @test words("portuguese") == words("portuguese"; all=true)
+    @test words("french") == words("french"; all=true)
 end
 
 @testset "Multilingual" begin
-    @test words("en") ⊊ words("english", "spanish", "portuguese")
+    @test words("en") ⊊ words("english", "spanish", "portuguese","french")
 end
 
 @testset "Error messages" begin
@@ -42,7 +45,7 @@ end
 
 @testset "Content" begin
     @testset "Formatting" begin
-        for langs in [("english",), ("spanish",), ("portuguese",), ("english", "spanish", "portuguese")], all in [false, true]
+		for langs in [("english",), ("spanish",), ("portuguese",), ("french",), ("english", "spanish", "portuguese","french")], all in [false, true]
             list = words(langs...; all)
             @test issorted(list)
             @test !any(word -> any(isspace, word), list) # No word contains whitespace
@@ -100,5 +103,19 @@ end
         @test "orange" ∉ pt
         @test "pear" ∉ pt
         @test "lkfjakljf" ∉ pt
+    end
+
+	@testset "French Content" begin
+        fr = words("fr")
+        for word in ["merci","français","fille","garçon","beau","belle","jour",
+					 "demain","amour","pas","je","ne","plus","petit","grand",
+					 "désolé","comme","son","il","était","sur","sont","avec"]
+            @test word ∈ fr
+        end
+        for word in ["levantate", "hi", "pear", "lkfjakljf", "the", "of",
+            "and", "to", "it", "with", "his", "that", "this", "from",
+            "by", "was", "were", "são", "estão"]
+            @test word ∉ fr
+        end
     end
 end
