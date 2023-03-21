@@ -97,10 +97,11 @@ const LOOKUP_TABLE = Dict(
     "português" => "pt",
     "por" => "pt",
     "pt" => "pt",
-	"french" => "fr",
-	"français" => "fr",
-	"fre" => "fr",
-	"fr" => "fr"
+    "french" => "fr",
+    "français" => "fr",
+    "fre" => "fr",
+    "fra" => "fr",
+    "fr" => "fr"
 )
 
 function combine_sorted!(lists::AbstractVector{<:AbstractVector})
