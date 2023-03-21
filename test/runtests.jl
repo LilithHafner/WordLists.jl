@@ -35,7 +35,7 @@ end
 end
 
 @testset "Multilingual" begin
-    @test words("en") ⊊ words("english", "spanish", "portuguese","french")
+    @test words("en") ⊊ words("english", "spanish", "portuguese", "french")
 end
 
 @testset "Error messages" begin
