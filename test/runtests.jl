@@ -19,7 +19,7 @@ end
     @test words("english") == words("en") == words("eng")
     @test words("spanish") == words("es") == words("spa") == words("español")
     @test words("portuguese") == words("pt") == words("por") == words("português")
-    @test words("french") == words("fr") == words("fre") == words("français")
+    @test words("french") == words("fr") == words("fre") == words("fra") == words("français")
 end
 
 @testset "Duplicate removal" begin
