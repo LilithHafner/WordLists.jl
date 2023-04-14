@@ -5,7 +5,7 @@
 [![Build Status](https://github.com/LilithHafner/WordLists.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/LilithHafner/WordLists.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Coverage](https://codecov.io/gh/LilithHafner/WordLists.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/LilithHafner/WordLists.jl)
 
-WordLists.jl provides lists of words from various languages (currently English, French, Portuguese and Spanish).
+WordLists.jl provides lists of words from various languages (currently English, French, Italian, Portuguese and Spanish).
 
 ```julia-repl
 julia> words("English")
@@ -26,6 +26,4 @@ julia> words("English")
 
 ## Help Wanted
 
-The current set of languages is small and the list of French, Spanish and Portuguese words is incomplete. If you
-have access to a higher quality list of French, Spanish and Portuguese words or words from a different language,
-please open a pull request or issue.
+The current set of languages is small and the list of French, Italian, Spanish and Portuguese words is incomplete. If you have access to a higher quality list of French, Italian, Spanish and Portuguese words or words from a different language, please open a pull request or issue.
