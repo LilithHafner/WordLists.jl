@@ -13,6 +13,7 @@ end
     @test words("spanish") isa Vector{String}
     @test words("portuguese") isa Vector{String}
     @test words("french") isa Vector{String}
+    @test words("italian") isa Vector{String}
 end
 
 @testset "Aliases" begin
@@ -20,6 +21,7 @@ end
     @test words("spanish") == words("es") == words("spa") == words("español")
     @test words("portuguese") == words("pt") == words("por") == words("português")
     @test words("french") == words("fr") == words("fre") == words("fra") == words("français")
+    @test words("italian") == words("it") == words("ita") == words("italiano")
 end
 
 @testset "Duplicate removal" begin
@@ -32,10 +34,11 @@ end
     @test words("spanish") == words("spanish"; all=true) # handle missing extra.txt
     @test words("portuguese") == words("portuguese"; all=true)
     @test words("french") == words("french"; all=true)
+    @test words("italian") == words("italian"; all=true)
 end
 
 @testset "Multilingual" begin
-    @test words("en") ⊊ words("english", "spanish", "portuguese", "french")
+    @test words("en") ⊊ words("english", "spanish", "portuguese", "french", "italian")
 end
 
 @testset "Error messages" begin
@@ -45,7 +48,7 @@ end
 
 @testset "Content" begin
     @testset "Formatting" begin
-        for langs in [("english",), ("spanish",), ("portuguese",), ("french",), ("english", "spanish", "portuguese","french")], all in [false, true]
+        for langs in [("english",), ("spanish",), ("portuguese",), ("french",), ("italian",), ("english", "spanish", "portuguese", "french", "italian")], all in [false, true]
             list = words(langs...; all)
             @test issorted(list)
             @test !any(word -> any(isspace, word), list) # No word contains whitespace
@@ -107,15 +110,29 @@ end
 
     @testset "French Content" begin
         fr = words("fr")
-        for word in ["merci","français","fille","garçon","beau","belle","jour",
-                     "demain","amour","pas","je","ne","plus","petit","grand",
-                     "désolé","comme","son","il","était","sur","sont","avec"]
+        for word in ["merci", "français", "fille", "garçon", "beau", "belle", "jour",
+            "demain", "amour", "pas", "je", "ne", "plus", "petit", "grand",
+            "désolé", "comme", "son", "il", "était", "sur", "sont", "avec"]
             @test word ∈ fr
         end
         for word in ["levantate", "hi", "pear", "lkfjakljf", "the", "of",
             "and", "to", "it", "with", "his", "that", "this", "from",
             "by", "was", "were", "são", "estão"]
             @test word ∉ fr
+        end
+    end
+
+    @testset "Italian Content" begin
+        it = words("it")
+        for word in ["grazie", "italiana", "ragazza", "bambino", "bella", "vero",
+            "giorno", "domani", "amore", "ci", "ne", "non", "più", "piccolo",
+            "grande", "scusa", "mi", "piace", "suo", "lui", "era", "su", "sono"]
+            @test word ∈ it
+        end
+        for word in ["levantate", "hi", "pear", "lkfjakljf", "the", "of",
+            "and", "to", "it", "with", "his", "that", "this", "from",
+            "by", "was", "were", "são", "estão", "avec"]
+            @test word ∉ it
         end
     end
 end
