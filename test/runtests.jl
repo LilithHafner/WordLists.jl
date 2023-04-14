@@ -45,7 +45,7 @@ end
 
 @testset "Content" begin
     @testset "Formatting" begin
-		for langs in [("english",), ("spanish",), ("portuguese",), ("french",), ("english", "spanish", "portuguese","french")], all in [false, true]
+        for langs in [("english",), ("spanish",), ("portuguese",), ("french",), ("english", "spanish", "portuguese","french")], all in [false, true]
             list = words(langs...; all)
             @test issorted(list)
             @test !any(word -> any(isspace, word), list) # No word contains whitespace
@@ -105,11 +105,11 @@ end
         @test "lkfjakljf" ∉ pt
     end
 
-	@testset "French Content" begin
+    @testset "French Content" begin
         fr = words("fr")
         for word in ["merci","français","fille","garçon","beau","belle","jour",
-					 "demain","amour","pas","je","ne","plus","petit","grand",
-					 "désolé","comme","son","il","était","sur","sont","avec"]
+                     "demain","amour","pas","je","ne","plus","petit","grand",
+                     "désolé","comme","son","il","était","sur","sont","avec"]
             @test word ∈ fr
         end
         for word in ["levantate", "hi", "pear", "lkfjakljf", "the", "of",
