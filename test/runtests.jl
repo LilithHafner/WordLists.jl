@@ -14,6 +14,7 @@ end
     @test words("portuguese") isa Vector{String}
     @test words("french") isa Vector{String}
     @test words("italian") isa Vector{String}
+    @test words("german") isa Vector{String}
 end
 
 @testset "Aliases" begin
@@ -22,6 +23,7 @@ end
     @test words("portuguese") == words("pt") == words("por") == words("português")
     @test words("french") == words("fr") == words("fre") == words("fra") == words("français")
     @test words("italian") == words("it") == words("ita") == words("italiano")
+    @test words("german") == words("de") == words("deu") == words("deutsch")
 end
 
 @testset "Duplicate removal" begin
@@ -35,10 +37,11 @@ end
     @test words("portuguese") == words("portuguese"; all=true)
     @test words("french") == words("french"; all=true)
     @test words("italian") == words("italian"; all=true)
+    @test words("german") == words("german"; all=true)
 end
 
 @testset "Multilingual" begin
-    @test words("en") ⊊ words("english", "spanish", "portuguese", "french", "italian")
+    @test words("en") ⊊ words("english", "spanish", "portuguese", "french", "italian", "german")
 end
 
 @testset "Error messages" begin
@@ -48,7 +51,7 @@ end
 
 @testset "Content" begin
     @testset "Formatting" begin
-        for langs in [("english",), ("spanish",), ("portuguese",), ("french",), ("italian",), ("english", "spanish", "portuguese", "french", "italian")], all in [false, true]
+        for langs in [("english",), ("spanish",), ("portuguese",), ("french",), ("italian",), ("german",), ("english", "spanish", "portuguese", "french", "italian", "german")], all in [false, true]
             list = words(langs...; all)
             @test issorted(list)
             @test !any(word -> any(isspace, word), list) # No word contains whitespace
@@ -133,6 +136,20 @@ end
             "and", "to", "it", "with", "his", "that", "this", "from",
             "by", "was", "were", "são", "estão", "avec"]
             @test word ∉ it
+        end
+    end
+
+    @testset "German Content" begin
+        de = words("de")
+        for word in ["können", "dürfen", "mögen", "ich", "bin", "müssen", "Frau",
+            "sollen", "haben", "sein", "wurden", "bis", "durch", "für", "morgen",
+            "aus", "bevor", "wie", "ab", "Sie", "worauf", "du", "Tag", "was"]
+            @test word ∈ de
+        end
+        for word in ["levantate", "pear", "lkfjakljf", "the", "of",
+            "and", "to", "with", "that", "this", "from",
+            "by", "were", "são", "estão", "avec"]
+            @test word ∉ de
         end
     end
 end
