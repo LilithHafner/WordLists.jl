@@ -15,6 +15,7 @@ end
     @test words("french") isa Vector{String}
     @test words("italian") isa Vector{String}
     @test words("german") isa Vector{String}
+    @test words("dutch") isa Vector{String}
 end
 
 @testset "Aliases" begin
@@ -24,6 +25,7 @@ end
     @test words("french") == words("fr") == words("fre") == words("fra") == words("français")
     @test words("italian") == words("it") == words("ita") == words("italiano")
     @test words("german") == words("de") == words("deu") == words("deutsch")
+    @test words("dutch") == words("nl") == words("nld") == words("nederlands")
 end
 
 @testset "Duplicate removal" begin
@@ -38,10 +40,11 @@ end
     @test words("french") == words("french"; all=true)
     @test words("italian") == words("italian"; all=true)
     @test words("german") == words("german"; all=true)
+    @test words("dutch") == words("dutch"; all=true)
 end
 
 @testset "Multilingual" begin
-    @test words("en") ⊊ words("english", "spanish", "portuguese", "french", "italian", "german")
+    @test words("en") ⊊ words("english", "spanish", "portuguese", "french", "italian", "german", "dutch")
 end
 
 @testset "Error messages" begin
@@ -51,7 +54,7 @@ end
 
 @testset "Content" begin
     @testset "Formatting" begin
-        for langs in [("english",), ("spanish",), ("portuguese",), ("french",), ("italian",), ("german",), ("english", "spanish", "portuguese", "french", "italian", "german")], all in [false, true]
+        for langs in [("english",), ("spanish",), ("portuguese",), ("french",), ("italian",), ("german",), ("dutch",), ("english", "spanish", "portuguese", "french", "italian", "german", "dutch")], all in [false, true]
             list = words(langs...; all)
             @test issorted(list)
             @test !any(word -> any(isspace, word), list) # No word contains whitespace
@@ -150,6 +153,20 @@ end
             "and", "to", "with", "that", "this", "from",
             "by", "were", "são", "estão", "avec"]
             @test word ∉ de
+        end
+    end
+
+    @testset "Dutch Content" begin
+        nl = words("nl")
+        for word in ["ik", "heet", "ben", "een", "de", "het", "man", "vrouw", "jongen",
+            "meisje", "huis", "hallo", "hoi", "goed", "slecht", "morgen", "goedenavond",
+            "alsjeblieft", "wij", "we", "jullie", "zij", "u", "sterk", "bijzonder"]
+            @test word ∈ nl
+        end
+        for word in ["levantate", "pear", "lkfjakljf", "the", "off", "soy",
+            "and", "to", "with", "that", "this", "frau", "null", "hoy",
+            "buy", "were", "são", "estão", "avec", "amore", "vida"]
+            @test word ∉ nl
         end
     end
 end
