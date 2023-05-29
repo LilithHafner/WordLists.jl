@@ -100,18 +100,17 @@ end
 
     @testset "Portuguese Content" begin
         pt = words("pt")
-
-        @test "a" ∈ pt
-        @test "ser" ∈ pt
-        @test "estar" ∈ pt
-        @test "bola" ∈ pt
-        @test "bem" ∈ pt
-        @test "levantar" ∈ pt
-        @test "levantate" ∉ pt
-        @test "hi" ∉ pt
-        @test "orange" ∉ pt
-        @test "pear" ∉ pt
-        @test "lkfjakljf" ∉ pt
+        for word in ["a", "ser", "estar", "olá", "bem", "levantar", "bolota", "cometa",
+            "cabeças", "idioma", "espanhol", "amor", "de", "isso", "isto", "aquilo",
+            "pregar", "orar", "pelejar", "caminhar", "falar", "palavra", "família",
+            "cafuné", "contêm", "desbundar", "lavagem", "xodó"]
+            @test word ∈ pt
+        end
+        for word in ["levantate", "hi", "orange", "bear", "lkfjakljf", "the", "ofset",
+            "und", "toll", "its", "with", "forza", "onto", "his", "that", "this", "have", "from",
+            "by", "was", "were"]
+            @test word ∉ pt
+        end
     end
 
     @testset "French Content" begin
