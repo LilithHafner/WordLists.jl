@@ -17,6 +17,16 @@ module WordLists
 
 export words
 
+const LANGUAGE_CODES = [
+    ["en", "english", "eng"],
+    ["es", "spanish", "español", "spa"],
+    ["pt", "portuguese", "português", "por"],
+    ["fr", "french", "français", "fre", "fra"],
+    ["it", "italian", "italiano", "ita"],
+    ["de", "german", "deutsch", "deu"],
+    ["nl", "dutch", "nederlands", "nld"],
+]
+
 """
     words(languages...; all)
 
@@ -29,13 +39,7 @@ Languages can be queried by iso code, name, or english name and are not case sen
 
 The following languages are currently supported:
 
-- English: "english", "eng", "en"
-- Spanish: "spanish", "español", "spa", "es"
-- Portuguese: "portuguese", "português", "por", "pt"
-- French: "french", "français", "fre", "fr"
-- Italian: "italian", "italiano", "ita", "it"
-- German: "german", "deutsch", "deu", "de"
-- Dutch: "dutch", "nederlands", "nld", "nl"
+$(join(("- $(uppercase(l[2][1]))$(l[2][2:end]): \"$(join(l, "\", \""))\"" for l in LANGUAGE_CODES), "\n"))
 
 Multilingual lists are supported. For example, `words("english", "spanish")` will return a
 sorted list containing words from both English and Spanish.
@@ -47,9 +51,7 @@ julia> words("english")
 257874-element Vector{String}:
  "Aani"
  "Aaron"
- "Aaronic"
  ⋮
- "zymurgy"
  "zythem"
  "zythum"
 
@@ -57,20 +59,15 @@ julia> words("es", "en")
 257874-element Vector{String}:
  "Aani"
  "Aaron"
- "Aaronic"
  ⋮
- "útero"
  "útil"
  "útiles"
 
-julia> rand(words("EnGLiSH", "EspañoL"; all=true), 6)
-6-element Vector{String}:
+julia> rand(words("EnGLiSH", "EspañoL"; all=true), 3)
+3-element Vector{String}:
  "Upham"
  "asentir"
  "butcher"
- "fireworm"
- "cirrolite"
- "revocable"
 ```
 """
 function words(languages::AbstractString...; all=false)
@@ -88,36 +85,7 @@ function words(languages::AbstractString...; all=false)
     combine_sorted!(lists)
 end
 
-const LOOKUP_TABLE = Dict(
-    "english" => "en",
-    "eng" => "en",
-    "en" => "en",
-    "spanish" => "es",
-    "español" => "es",
-    "spa" => "es",
-    "es" => "es",
-    "portuguese" => "pt",
-    "português" => "pt",
-    "por" => "pt",
-    "pt" => "pt",
-    "french" => "fr",
-    "français" => "fr",
-    "fre" => "fr",
-    "fra" => "fr",
-    "fr" => "fr",
-    "italian" => "it",
-    "italiano" => "it",
-    "ita" => "it",
-    "it" => "it",
-    "german" => "de",
-    "deutsch" => "de",
-    "deu" => "de",
-    "de" => "de",
-    "dutch" => "nl",
-    "nederlands" => "nl",
-    "nld" => "nl",
-    "nl" => "nl"
-)
+const LOOKUP_TABLE = Dict(id => l[1] for l in LANGUAGE_CODES for id in l)
 
 function combine_sorted!(lists::AbstractVector{<:AbstractVector})
     while length(lists) > 1
